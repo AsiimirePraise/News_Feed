@@ -68,8 +68,7 @@ export default function NewsFeed() {
   return (
     <div className="news-feed">
       <div className="container">
-        <h1 className="feed-title">Praise Feed </h1>
-
+        <h1 className="feed-title">Search by category: technology, love, lifestyle, education and many more </h1>
         <div className="search-container">
           <input
             type="text"
