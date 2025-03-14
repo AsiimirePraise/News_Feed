@@ -2,27 +2,25 @@
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: chocolate;
   background: linear-gradient(90deg, #3498db, #2c3e50);
-  -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   padding: 0.5rem 0;
-}
-.site-title {
-  color: chocolate;
-  text-align: center;
 }
 
 .post-page {
   padding: 2rem 0;
   background-color: #f9f9f9;
   min-height: 100vh;
-  margin-left: 300px;
+  margin-left: 220px; 
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
   max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -43,7 +41,56 @@
   background-color: #3498db;
   color: white;
 }
-#content{
+
+#content {
   font-size: larger;
   line-height: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .post-page {
+    margin-left: 0; 
+  }
+}
+
+@media (max-width: 768px) {
+  .site-title {
+    font-size: 2rem; }
+
+  .post-page {
+    padding: 1rem 0; 
+  }
+
+  .container {
+    padding: 0 0.5rem; 
+  }
+
+  .back-button {
+    padding: 0.4rem 0.8rem; 
+    font-size: 0.9rem; }
+
+  #content {
+    font-size: 1rem; 
+    line-height: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-title {
+    font-size: 1.5rem; 
+  }
+
+  .post-page {
+    padding: 0.5rem 0; 
+  }
+
+  .back-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  #content {
+    font-size: 0.9rem; 
+    line-height: 1.4rem; 
+  }
 }
