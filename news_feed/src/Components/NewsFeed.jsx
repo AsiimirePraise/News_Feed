@@ -16,7 +16,7 @@ export default function NewsFeed() {
   const fetchPosts = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("https://newsfeedstrapi-1.onrender.com/api/posts", {
+      const response = await fetch("https://newsfeedstrapi-1.onrender.com/api/post", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
