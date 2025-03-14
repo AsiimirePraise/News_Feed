@@ -1,18 +1,16 @@
-import { useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NewsFeed from './Components/NewsFeed';
-import './App.css'
+import PostPage from './Components/PostPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>My News Feed</h1>
-      </header>
-      <main>
-        <NewsFeed />
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<NewsFeed />} />
+        <Route path="/post" element={<PostPage />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App
+export default App;

@@ -1,0 +1,49 @@
+.site-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  background: linear-gradient(90deg, #3498db, #2c3e50);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: 0.5rem 0;
+}
+.site-title {
+  color: chocolate;
+  text-align: center;
+}
+
+.post-page {
+  padding: 2rem 0;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  margin-left: 300px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.back-button {
+  background-color: transparent;
+  color: #3498db;
+  border: 1px solid #3498db;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #3498db;
+  color: white;
+}
+#content{
+  font-size: larger;
+  line-height: 2rem;
+}

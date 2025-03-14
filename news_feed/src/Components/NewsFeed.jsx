@@ -1,19 +1,18 @@
-"use client";
-
 import { useState, useEffect } from "react";
+import Post from "./post";
 import "./NewsFeed.css";
 
 export default function NewsFeed() {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [expandedPost, setExpandedPost] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showMoreCategories, setShowMoreCategories] = useState(false);
 
   useEffect(() => {
     fetchPosts();
   }, []);
-  // fetch posts
+  //fetch posts form my strapi
   const fetchPosts = async () => {
     try {
       setIsLoading(true);
@@ -23,17 +22,15 @@ export default function NewsFeed() {
           "Content-Type": "application/json",
         },
       });
-      // handle response
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("Raw API response:", data);
-      // data validity
+
       if (data && Array.isArray(data.data)) {
         setPosts(data.data);
-        console.log("Processed posts:", data.data);
       } else {
         console.error("Unexpected data structure:", data);
         setError("Invalid data format received");
@@ -45,11 +42,7 @@ export default function NewsFeed() {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    console.log("Current posts state:", posts);
-  }, [posts]);
-
+  //filter depending on what i search
   const filteredPosts = posts.filter((post) => {
     if (!post) return false;
 
@@ -57,18 +50,25 @@ export default function NewsFeed() {
     const category = post.Category?.toLowerCase() || "";
     const search = searchTerm.toLowerCase();
 
-    console.log("Post:", post);
-    console.log("Title:", title, "Category:", category, "Search:", search);
-    // return the search item
     return title.includes(search) || category.includes(search);
   });
-
-  console.log("Filtered posts:", filteredPosts);
 
   return (
     <div className="news-feed">
       <div className="container">
-        <h1 className="feed-title">Search by category: technology, love, lifestyle, education and many more </h1>
+        <h1 id="heading">MY NEWS FEED</h1>
+        <h1 className="feed-title">
+          Search by category: technology, love, lifestyle, education
+          {showMoreCategories ? ", business, finance, health, travel" : ""}{" "}
+          <span
+            className="show-more"
+            style={{ cursor: "pointer", color: "red", textDecoration: "none" }}
+            onClick={() => setShowMoreCategories(!showMoreCategories)}
+          >
+            {showMoreCategories ? "Show less" : "many more"}
+          </span>
+        </h1>
+
         <div className="search-container">
           <input
             type="text"
@@ -83,7 +83,7 @@ export default function NewsFeed() {
             </button>
           )}
         </div>
-        {/* when fetching posts */}
+
         {isLoading ? (
           <div className="loading">Loading posts...</div>
         ) : error ? (
@@ -99,49 +99,11 @@ export default function NewsFeed() {
                 </p>
               </div>
             ) : (
-              filteredPosts.map((post) => (
-                <article key={post.id} className="post-card">
-                  <div className="post-header">
-                    <span className="post-category">
-                      {post.Category || "Uncategorized"}
-                    </span>
-                    <time className="post-date">
-                      {new Date(post.publishedAt).toLocaleDateString()}
-                    </time>
-                  </div>
-                  {/* display author and title */}
-                  <h2 className="post-title">
-                    {post.Title || "Untitled Post"}
-                  </h2>
-
-                  <p className="post-author">By {post.Author || "Anonymous"}</p>
-
-                  <div className="post-content">
-                    {expandedPost === post.id ? (
-                      <p>{post.Content}</p>
-                    ) : (
-                      <p>
-                        {post.Excerpt ||
-                          post.Content?.substring(0, 200) + "..."}
-                      </p>
-                    )}
-                  </div>
-
-                  <button
-                    onClick={() =>
-                      setExpandedPost(expandedPost === post.id ? null : post.id)
-                    }
-                    className="read-more"
-                  >
-                    {expandedPost === post.id ? "Show Less" : "Read More"}
-                  </button>
-                </article>
-              ))
+              filteredPosts.map((post) => <Post key={post.id} post={post} />)
             )}
           </div>
         )}
       </div>
-      
     </div>
   );
 }
