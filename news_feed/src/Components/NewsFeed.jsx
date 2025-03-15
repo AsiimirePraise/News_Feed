@@ -16,12 +16,11 @@ export default function NewsFeed() {
   const fetchPosts = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("https://newsfeedstrapi-1.onrender.com/api/post", {
+      const response = await fetch("https://newsfeedstrapi2.onrender.com/api/posts", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        mode: "no-cors" 
       });
 
       if (!response.ok) {
